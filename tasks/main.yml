@@ -1,0 +1,14 @@
+---
+- name: "setup timezone"
+  timezone:
+    name: Europe/Moscow
+  notify: restart cron
+
+- name: "copy timesyncd.conf to /etc/systemd/"
+  copy:
+    src: files/timesyncd.conf
+    dest: /etc/systemd/timesyncd.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart timesyncd

@@ -1,0 +1,14 @@
+---
+# handlers file for ntp
+- name: restart cron
+  become: true
+  ansible.builtin.service:
+    name: cron
+    state: restarted
+  when: service_default_state | default('started') == 'started'
+
+- name: restart timesyncd
+  become: true
+  ansible.builtin.service:
+    name: systemd-timesyncd
+    state: restarted
